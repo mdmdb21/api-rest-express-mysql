@@ -1,10 +1,12 @@
 //const express = require("express"); //importar en nodejs
 import express from "express" 
-import {app, PORT, DATABASE} from "./constantes" //importar constantes
-import provedoresRouter from "./routers/provedoresRouters" //importar provedoresRouter
+import {PORT} from "./constantes.js" //importar constantes
+import provedoresRouter from "./routers/provedoresRouters.js" //importar provedoresRouter
 
 
 const router = express.Router() //creamos un router
+
+const app = express() //creamos una aplicación
 app.use("/provedores", provedoresRouter) 
 
 router.get(
@@ -22,34 +24,9 @@ app.get(
     res.status(200).send("Home")
 })
 
-app.get(//lectura
-    "/provedores", //ruta estatica
-    (req, res) => {
-    res.status(200).send("listado de provedores")
-})
 
-app.get(//lectura
-    "/provedores/:id", //ruta dinamica por parámetro
-    (req, res) => {
-        const id = req.params.id
-    res.status(200).send(`Ususario con id ${id}`)
-})
+app.use(provedoresRouter)
 
-app.get(//lectura
-    "/provedores/:id", //ruta dinamica por parámetro
-    (req, res) => {
-        const id = req.params.id
-    res.status(200).json({
-       message: "listado de provedores",
-       cod:id
-    }) })
-
-app.get(
-    "/users/user/:usuarioPersonalizado",
-    function (req, res) {
-        res.status(200).send(`Usuario llamado ${req.params.usuarioPersonalizado}`)
-    }
-)
 
 
 //escuchamos (levantamos el servidor)
@@ -57,7 +34,7 @@ app.get(
 app.listen(
     PORT,
     () =>{
-        console.log(`Servidor abierto en el puerto ${PORT}, base de datos ${DATABASE}`)
+        console.log(`Servidor abierto en el puerto ${PORT}`)
     }
 ) 
 //callback función dentro de una función 

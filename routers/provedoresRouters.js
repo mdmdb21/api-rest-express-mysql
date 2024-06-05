@@ -32,11 +32,10 @@ router.delete(//borrar
 )  
 
 router.post( //crear
-     "/provedores/:id",
-        (req,res) => {
+     "/provedores",
+        (_,res) => {
         res.status(200).json({
-        message: "Crear un provedores",
-        cod:req.params.id
+        message: "Crear un provedores"
         })
     }
 ) 
